@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Timer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Start Screen -->
+    <div id="start-screen" class="screen active">
+        <div class="container">
+            <h1 class="title">💪 Full Body Workout</h1>
+            <div class="workout-stats">
+                <div class="stat">
+                    <span class="stat-value">45</span>
+                    <span class="stat-label">Minutes</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">~375</span>
+                    <span class="stat-label">Calories</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">5</span>
+                    <span class="stat-label">Phases</span>
+                </div>
+            </div>
+
+            <div class="equipment-section">
+                <h3>Equipment Needed</h3>
+                <div class="equipment-list">
+                    <span class="equipment-item">🏋️ 5kg Dumbbells</span>
+                    <span class="equipment-item">🏋️ 7.5kg Dumbbells</span>
+                    <span class="equipment-item">🏋️ 10kg Dumbbells</span>
+                    <span class="equipment-item">🏋️ 20kg Barbell</span>
+                </div>
+            </div>
+
+            <div class="phases-preview">
+                <h3>Workout Phases</h3>
+                <div class="phase-list">
+                    <div class="phase-item"><span class="phase-dot warm"></span> Warm-up (5 min)</div>
+                    <div class="phase-item"><span class="phase-dot lower"></span> Lower Body</div>
+                    <div class="phase-item"><span class="phase-dot push"></span> Upper Push</div>
+                    <div class="phase-item"><span class="phase-dot pull"></span> Upper Pull</div>
+                    <div class="phase-item"><span class="phase-dot core"></span> Core Finisher</div>
+                    <div class="phase-item"><span class="phase-dot cool"></span> Cool-down</div>
+                </div>
+            </div>
+
+            <div class="music-section">
+                <h3>🎵 Add Your Music</h3>
+                <input type="text" id="music-link" placeholder="Paste YouTube or Spotify link..." class="music-input">
+                <button id="open-music-btn" class="btn btn-secondary">Open Music</button>
+            </div>
+
+            <button id="start-btn" class="btn btn-primary btn-large">Start Workout</button>
+        </div>
+    </div>
+
+    <!-- Workout Screen -->
+    <div id="workout-screen" class="screen">
+        <div class="container">
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+                <span class="progress-text" id="progress-text">0%</span>
+            </div>
+
+            <!-- Phase Indicator -->
+            <div class="phase-indicator" id="phase-indicator">Warm-up</div>
+
+            <!-- Exercise Display -->
+            <div class="exercise-display">
+                <h2 class="exercise-name" id="exercise-name">Jumping Jacks</h2>
+                <div class="set-info" id="set-info">60 seconds</div>
+
+                <!-- SVG Animation Container -->
+                <div class="animation-container" id="animation-container">
+                    <!-- SVG will be inserted here -->
+                </div>
+
+                <!-- Timer -->
+                <div class="timer-display">
+                    <span class="timer-value" id="timer-value">60</span>
+                    <span class="timer-label">seconds</span>
+                </div>
+            </div>
+
+            <!-- Up Next -->
+            <div class="up-next" id="up-next">
+                <span class="up-next-label">Up Next:</span>
+                <span class="up-next-exercise" id="up-next-exercise">Arm Circles</span>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button class="btn btn-control" id="prev-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                </button>
+                <button class="btn btn-control btn-pause" id="pause-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor" id="pause-icon"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor" id="play-icon" style="display:none"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <button class="btn btn-control" id="next-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                </button>
+            </div>
+
+            <!-- Total Time -->
+            <div class="total-time">
+                <span id="elapsed-time">00:00</span> / <span id="total-time">45:00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rest Screen -->
+    <div id="rest-screen" class="screen">
+        <div class="container">
+            <div class="rest-content">
+                <h2>Rest</h2>
+                <div class="rest-timer" id="rest-timer">60</div>
+                <p class="rest-message">Catch your breath!</p>
+                <div class="up-next up-next-rest">
+                    <span class="up-next-label">Up Next:</span>
+                    <span class="up-next-exercise" id="rest-up-next">Next Exercise</span>
+                </div>
+                <button class="btn btn-secondary" id="skip-rest-btn">Skip Rest</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Completion Screen -->
+    <div id="complete-screen" class="screen">
+        <div class="container">
+            <div class="complete-content">
+                <div class="trophy">🏆</div>
+                <h1>Workout Complete!</h1>
+                <div class="final-stats">
+                    <div class="stat">
+                        <span class="stat-value" id="final-time">45:00</span>
+                        <span class="stat-label">Total Time</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">~375</span>
+                        <span class="stat-label">Calories Burned</span>
+                    </div>
+                </div>
+                <p class="congrats-message">Great job! You crushed it! 💪</p>
+                <div class="complete-buttons">
+                    <div class="download-options">
+                        <button class="btn btn-secondary" id="download-feed-btn">Feed Image (4:5)</button>
+                        <button class="btn btn-secondary" id="download-story-btn">Story Image (9:16)</button>
+                        <button class="btn btn-secondary" id="download-text-btn">Text File</button>
+                    </div>
+                    <button class="btn btn-primary btn-large" id="restart-btn">Start Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Workout List Sidebar -->
+    <div id="workout-sidebar" class="workout-sidebar">
+        <button class="sidebar-toggle" id="sidebar-toggle">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+        </button>
+        <div class="sidebar-content" id="sidebar-content">
+            <h3>Workout List</h3>
+            <div class="sidebar-list" id="sidebar-list">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script src="exercises.js"></script>
+    <script src="animations.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
