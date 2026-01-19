@@ -21,6 +21,7 @@ class WorkoutApp {
             downloadFeedBtn: document.getElementById('download-feed-btn'),
             downloadStoryBtn: document.getElementById('download-story-btn'),
             downloadTextBtn: document.getElementById('download-text-btn'),
+            homeBtn: document.getElementById('home-btn'),
 
             progressBar: document.getElementById('progress-bar'),
             progressText: document.getElementById('progress-text'),
@@ -80,6 +81,7 @@ class WorkoutApp {
         this.elements.downloadFeedBtn.addEventListener('click', () => this.downloadWorkoutImage('feed'));
         this.elements.downloadStoryBtn.addEventListener('click', () => this.downloadWorkoutImage('story'));
         this.elements.downloadTextBtn.addEventListener('click', () => this.downloadWorkoutText());
+        this.elements.homeBtn.addEventListener('click', () => this.goHome());
 
         // Sidebar toggle
         this.elements.sidebarToggle.addEventListener('click', () => this.toggleSidebar());
@@ -409,6 +411,13 @@ class WorkoutApp {
         this.elements.progressText.textContent = '0%';
 
         this.showScreen('start');
+    }
+
+    goHome() {
+        if (this.isRunning && !confirm('Are you sure you want to exit the workout?')) {
+            return;
+        }
+        this.restart();
     }
 
     openMusic() {
